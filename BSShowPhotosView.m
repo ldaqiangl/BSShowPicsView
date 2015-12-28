@@ -63,7 +63,7 @@
         self.picImageView.image = displayImg;
         [self.delBtn setImage:[UIImage imageNamed:delImg] forState:UIControlStateNormal];
     } else {
-        
+        self.delBtn.hidden = YES;
         self.picImageView.image = [UIImage imageNamed:picName];
     }
 }
