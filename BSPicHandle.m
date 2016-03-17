@@ -1,9 +1,9 @@
 //
 //  BSPicHandle.m
-//  Kangs100Vip
+//  YiJianDoctor
 //
-//  Created by 董富强 on 15/12/26.
-//  Copyright © 2015年 06-kangs100. All rights reserved.
+//  Created by YJHou on 15/12/28.
+//  Copyright © 2015年 YJHou. All rights reserved.
 //
 
 #import "BSPicHandle.h"
@@ -28,9 +28,10 @@ bs_singleton_implementation(BSPicHandle);
 - (NSString *)storeOneImageWith_BSTool:(NSObject *)imageObj {
     NSString *imgName;
     if (imageObj) {
-        imgName = [NSString stringWithFormat:@"%@.jpg",[self getUUIDString_BS]];
         
         if ([imageObj isKindOfClass:[UIImage class]]) {
+            imgName = [NSString stringWithFormat:@"%@.jpg",[self getUUIDString_BS]];
+            
             UIImage *pic = (UIImage *)imageObj;
             
             //存储图片前对图片进行处理
@@ -45,7 +46,7 @@ bs_singleton_implementation(BSPicHandle);
             [self.sdImageCache storeImage:pic forKey:imgName];
         } else if ([imageObj isKindOfClass:[NSString class]]&&[[NSString stringWithFormat:@"%@",imageObj] hasPrefix:@"http"]) {
             NSString *imgUrl = (NSString *)imageObj;
-            
+            imgName = [imgUrl mutableCopy];
             [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imgUrl] options:SDWebImageDownloaderLowPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
                 
             } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
@@ -60,7 +61,6 @@ bs_singleton_implementation(BSPicHandle);
     }
     return imgName;
 }
-
 
 - (NSArray *)storeImageWith_BSTool:(NSArray *)images {
     
@@ -124,6 +124,7 @@ bs_singleton_implementation(BSPicHandle);
 
 //缩
 - (UIImage *)compressImageToTargetSizeEqualRatioWith_BS:(UIImage *)sourceImage andTargetSize:(CGSize)targetSize {
+    
     
     
     return sourceImage;

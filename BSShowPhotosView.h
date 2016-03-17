@@ -1,9 +1,9 @@
 //
-//  BSShowPhotosView.h
-//  Kangs100Vip
+//  AddZSViewController.m
+//  YiJianDoctor
 //
-//  Created by 董富强 on 15/12/26.
-//  Copyright © 2015年 06-kangs100. All rights reserved.
+//  Created by YJHou on 15/12/28.
+//  Copyright © 2015年 YJHou. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -13,9 +13,6 @@ typedef NS_OPTIONS(NSInteger, BSShowPhotosViewType) {
     BSShowPhotosViewCanDeletePicType = 1,
     BSShowPhotosViewNoDeletePicType  = 1 << 1,
 };
-
-
-
 
 @class BSShowPhotosView;
 /** 数据源代理 */
@@ -34,19 +31,21 @@ typedef NS_OPTIONS(NSInteger, BSShowPhotosViewType) {
 /** 事件代理 */
 @protocol BSShowPhotosViewDelegate <NSObject>
 @optional;
-
-/** 添加图片 */
+/** 图片添加完成 */
+- (void)showPhotosViewPicDidAdd:(BSShowPhotosView *)showPhotoView andCurrentPics:(NSArray *)picNames;
+/** 添加图片按钮已经点击 */
 - (void)showPhotosViewAddDidSelected:(BSShowPhotosView *)showPhotoView andCurrentPics:(NSArray *)picNames;
 /** 删除图片 */
 - (void)showPhotosViewDeletePics:(BSShowPhotosView *)showPhotoView andRemainingPics:(NSArray *)picNames;
 /** 点击图片查看大图 */
-- (void)showPhotosViewScanPics:(BSShowPhotosView *)showPhotoView withAllPicNames:(NSArray *)picNames;
+- (void)showPhotosViewScanPics:(BSShowPhotosView *)showPhotoView withAllPicNames:(NSArray *)picNames andClickedIndex:(NSInteger)picIndex;
 /** 到达showPhotosView图片数量上限 */
 - (void)showPhotosView:(BSShowPhotosView *)showPhotoView withLimitMaxCount:(NSInteger)maxCount andCurrentPicNames:(NSArray *)picNames;
 
 @end
 
 
+#import "BSPicHandle.h"
 
 @interface BSShowPhotosView : UIView
 
@@ -55,7 +54,6 @@ typedef NS_OPTIONS(NSInteger, BSShowPhotosViewType) {
 
 /**
  *  预处理 设置删除按钮和添加按钮
- *
  *  @param delImage 删除按钮素材名称
  *  @param addImage 添加按钮素材名称
  *  @param maxCount 容纳图片数量上限

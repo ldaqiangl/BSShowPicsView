@@ -1,9 +1,9 @@
 //
 //  BSPicHandle.h
-//  Kangs100Vip
+//  YiJianDoctor
 //
-//  Created by 董富强 on 15/12/26.
-//  Copyright © 2015年 06-kangs100. All rights reserved.
+//  Created by YJHou on 15/12/28.
+//  Copyright © 2015年 YJHou. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -44,7 +44,6 @@ bs_singleton_interface(BSPicHandle);
  *  @return one image name
  */
 - (NSString *)storeOneImageWith_BSTool:(NSObject *)imageObj;
-
 
 /**
  *  存储图片数组到文件系统
